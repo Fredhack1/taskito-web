@@ -1,7 +1,6 @@
 package com.taskito_web.backend.service;
 
 import com.taskito_web.backend.model.Task;
-import com.taskito_web.backend.repository.TaskRepository;
 
 import java.util.List;
 

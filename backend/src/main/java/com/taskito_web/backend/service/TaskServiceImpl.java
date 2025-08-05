@@ -21,7 +21,7 @@ public class TaskServiceImpl {
     }
 
     public Task getTaskById(Long id) {
-        return taskRepository.findById(id).get();
+        return taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
     }
 
     public Task createTask(Task task) {
@@ -29,7 +29,15 @@ public class TaskServiceImpl {
     }
 
     public Task updateTask(Long id, Task updatedTask) {
-        return taskRepository.save(updatedTask);
+        Task existingTask = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+
+        existingTask.setTitle(updatedTask.getTitle());
+        existingTask.setDescription(updatedTask.getDescription());
+        existingTask.setStatus(updatedTask.getStatus());
+        existingTask.setCreatedAt(updatedTask.getCreatedAt());
+        existingTask.setDueAt(updatedTask.getDueAt());
+
+        return taskRepository.save(existingTask);
     }
 
     public void deleteTaskById(Long id) {
