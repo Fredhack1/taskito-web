@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TaskServiceImpl {
+public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
     @Autowired
@@ -34,13 +34,15 @@ public class TaskServiceImpl {
         existingTask.setTitle(updatedTask.getTitle());
         existingTask.setDescription(updatedTask.getDescription());
         existingTask.setStatus(updatedTask.getStatus());
-        existingTask.setCreatedAt(updatedTask.getCreatedAt());
+        // existingTask.setCreatedAt(updatedTask.getCreatedAt());
         existingTask.setDueAt(updatedTask.getDueAt());
 
         return taskRepository.save(existingTask);
     }
 
-    public void deleteTaskById(Long id) {
+    @Override
+    public void deleteTask(Long id) {
         taskRepository.deleteById(id);
     }
+
 }
