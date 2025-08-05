@@ -1,4 +1,7 @@
 package com.taskito_web.backend.repository;
 
-public interface TaskRepository {
+import com.taskito_web.backend.model.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TaskRepository extends JpaRepository<Task, Long> {
 }
