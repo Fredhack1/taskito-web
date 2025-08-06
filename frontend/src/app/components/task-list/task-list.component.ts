@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.css'
+  styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
@@ -17,6 +17,7 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskService.getAllTasks().subscribe((data) => {
+      console.log("Tâches reçues :", data);
       this.tasks = data;
     });
   }
