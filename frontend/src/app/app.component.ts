@@ -10,5 +10,5 @@ import { TaskListComponent } from "./components/task-list/task-list.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Taskito web';
+  title = 'Taskito Web';
 }
