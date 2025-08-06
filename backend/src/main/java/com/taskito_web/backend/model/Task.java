@@ -2,7 +2,7 @@ package com.taskito_web.backend.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tasks")
@@ -16,15 +16,23 @@ public class Task {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private String status;
+    private TaskStatus status;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
-    private LocalDateTime dueAt;
+    private LocalDate dueAt;
 
     // constructeur
+    public Task(String title, String description, TaskStatus status, LocalDate dueAt) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.createdAt = LocalDate.now();
+        this.dueAt = dueAt;
+    }
+
     public Task() {
-        this.createdAt = LocalDateTime.now();
+
     }
 
     public Long getId() {
@@ -51,27 +59,27 @@ public class Task {
         this.description = description;
     }
 
-    public String getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getDueAt() {
+    public LocalDate getDueAt() {
         return dueAt;
     }
 
-    public void setDueAt(LocalDateTime dueAt) {
+    public void setDueAt(LocalDate dueAt) {
         this.dueAt = dueAt;
     }
 }
