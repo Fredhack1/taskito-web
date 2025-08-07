@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Task, TaskStatus } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { TaskStore } from '../../store/task.store';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-form',
@@ -15,6 +16,7 @@ import { TaskStore } from '../../store/task.store';
 export class TaskFormComponent {
 
   successMessage: string | null = null;
+  taskId: number | null = null;
 
   task: Task = {
     title: '',
@@ -24,7 +26,12 @@ export class TaskFormComponent {
     dueAt: new Date().toString().split('T')[0],
   }
   
-  constructor(private taskService: TaskService, private taskStore: TaskStore) {}
+  constructor(
+    private taskService: TaskService,
+    private taskStore: TaskStore,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   onSubmit() {
     this.taskService.createTask(this.task).subscribe({

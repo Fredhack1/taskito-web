@@ -14,18 +14,22 @@ import { TaskStore } from '../../store/task.store';
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
 
-  constructor(private taskService: TaskService, public taskStore: TaskStore) {}
+  constructor(private taskService: TaskService, public taskStore: TaskStore) { }
 
   deleteTask(id: number) {
-  this.taskService.deleteTask(id).subscribe({
-    next: () => {
-      this.taskStore.removeTask(id);
-    },
-    error: (err) => {
-      console.error('Erreur suppression tâche :', err);
-    }
-  });
-}
+    // const confirmDelete = window.confirm("Voulez-vous vraiment le supprimer ?");
+
+    // if (!confirmDelete) return;
+
+    this.taskService.deleteTask(id).subscribe({
+      next: () => {
+        this.taskStore.removeTask(id);
+      },
+      error: (err) => {
+        console.error('Erreur suppression tâche :', err);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.taskService.getAllTasks().subscribe((data) => {
