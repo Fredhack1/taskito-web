@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Task, TaskStatus } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
+import { TaskStore } from '../../store/task.store';
 
 @Component({
   selector: 'app-task-form',
@@ -23,12 +24,13 @@ export class TaskFormComponent {
     dueAt: new Date().toString().split('T')[0],
   }
   
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private taskStore: TaskStore) {}
 
   onSubmit() {
     this.taskService.createTask(this.task).subscribe({
       next: (created) => {
         console.log("La tâche a été ajoutée", created);
+        this.taskStore.addTask(created);
 
         // Réinitialiser le formulaire
         this.task = {
