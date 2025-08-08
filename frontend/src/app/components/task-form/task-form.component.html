@@ -2,10 +2,13 @@
 <div *ngIf="successMessage" class="p-2 mb-4 rounded bg-green-100 text-green-800 border border-green-300">
     {{ successMessage }}
 </div>
+<div *ngIf="errorMessage" class="flex flex-col p-2 mb-4 rounded bg-red-100 text-red-800 border border-red-300 items-center animate-pulse ease-in">
+    {{ errorMessage }}
+</div>
 <div class="p-4">
     <h2 class="text-xl font-bold mb-4">Créer une nouvelle tâche</h2>
 
-    <form (ngSubmit)="onSubmit()" #taskForm="ngForm" class="space-y-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" #taskForm="ngForm" class="space-y-4">
         <input type="text" [(ngModel)]="task.title" name="title" placeholder="Titre" required
             class="w-full p-2 border rounded" />
 
@@ -14,8 +17,13 @@
 
         <div id="status">
             <label class="mb-0" for="status">Status :</label>
-            <select [(ngModel)]="task.status" name="status" class="w-full p-2 border rounded mb-2">
+            <!-- <select [(ngModel)]="task.status" name="status" class="w-full p-2 border rounded mb-2">
                 <option *ngFor="let s of ['TO_DO', 'IN_PROGRESS', 'COMPLETED']" [value]="s">{{ s }}</option>
+            </select> -->
+            <select formControlName="status" class="w-full p-2 border rounded mb-2">
+                <option value="TO_DO">À faire</option>
+                <option value="IN_PROGRESS">En cours</option>
+                <option value="COMPLETED">Terminé</option>
             </select>
         </div>
 
